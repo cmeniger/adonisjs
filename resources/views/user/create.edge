@@ -1,0 +1,24 @@
+@layout('_layouts.main')
+
+@section('content')
+    <form method="POST" action="{{ route('user.store') }}">
+        <div>
+            <label for="">Username</label> <input type="text" name="username" value="{{ old('username','') }}"/>
+            {{ elIf('<span>$self</span>', getErrorFor('username'), hasErrorFor('username')) }}
+        </div>
+        <div>
+            <label for="">Email</label> <input type="text" name="email" value="{{ old('email','') }}"/>
+            {{ elIf('<span>$self</span>', getErrorFor('email'), hasErrorFor('email')) }}
+        </div>
+        <div>
+            <label for="">Password</label> <input type="password" name="password"/>
+            {{ elIf('<span>$self</span>', getErrorFor('password'), hasErrorFor('password')) }}
+        </div>
+        <div>
+            <label for="">Confirm password</label> <input type="password" name="password_confirmation"/>
+            {{ elIf('<span>$self</span>', getErrorFor('password_confirmation'), hasErrorFor('password_confirmation')) }}
+        </div>
+        {{ csrfField() }}
+        <button type="submit"> Submit</button>
+    </form>
+@endsection

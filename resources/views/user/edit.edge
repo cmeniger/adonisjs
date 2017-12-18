@@ -1,0 +1,20 @@
+@layout('_layouts.main')
+
+@section('content')
+    <form method="POST" action="{{ route('user.update', {id:user._id}) }}?_method=PUT">
+        <div>
+            <label for="">Username</label> <input type="text" name="username" value="{{ old('username',user.username) }}"/>
+            {{ elIf('<span>$self</span>', getErrorFor('username'), hasErrorFor('username')) }}
+        </div>
+        <div>
+            <label for="">Email</label> <input type="text" name="email" value="{{ old('email',user.email) }}"/>
+            {{ elIf('<span>$self</span>', getErrorFor('email'), hasErrorFor('email')) }}
+        </div>
+        <div>
+            <label for="">Password</label> <input type="password" name="password"/>
+            {{ elIf('<span>$self</span>', getErrorFor('password'), hasErrorFor('password')) }}
+        </div>
+        {{ csrfField() }}
+        <button type="submit"> Update</button>
+    </form>
+@endsection

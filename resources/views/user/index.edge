@@ -1,0 +1,9 @@
+@layout('_layouts.main')
+
+@section('content')
+    <ul>
+      @each(user in users)
+        <li>{{ user.username }}<a href="{{ route('user.show',{id:user._id}) }}">Show</a><a href="{{ route('user.edit',{id:user._id}) }}">Edit</a></li>
+      @endeach
+    </ul>
+@endsection
