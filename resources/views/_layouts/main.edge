@@ -8,6 +8,11 @@
     <body>
         <section class="section">
             <div class="container">
+                @if(old('notification'))
+                    <div class="notification is-success">
+                        {{ old('notification') }}
+                    </div>
+                @endif
                 @!section('content')
             </div>
         </section>

@@ -14,6 +14,10 @@
             <label for="">Password</label> <input type="password" name="password"/>
             {{ elIf('<span>$self</span>', getErrorFor('password'), hasErrorFor('password')) }}
         </div>
+        <div>
+            <label for="">Confirm password</label> <input type="password" name="password_confirmation"/>
+            {{ elIf('<span>$self</span>', getErrorFor('password_confirmation'), hasErrorFor('password_confirmation')) }}
+        </div>
         {{ csrfField() }}
         <button type="submit"> Update</button>
     </form>

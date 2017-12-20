@@ -1,5 +1,6 @@
 'use strict'
 const User = use('App/Models/User');
+const Hash = use('Hash');
 class UserController {
     async index({view})
     {
@@ -35,6 +36,31 @@ class UserController {
     {
         const user = await User.findOrFail(params.id);
         return view.render('user.edit', {user: user.toJSON()});
+    }
+
+    async update({request, response, session, params})
+    {
+        // persist to database
+        const user = await User.findOrFail(params.id);
+        user.username = request.input('username');
+        user.email = request.input('email');
+        if(request.input('password'))
+        {
+            user.password = request.input('password');
+        }
+        await user.save();
+        // Fash success message to session
+        session.flash({notification: 'User updated!'});
+        return response.redirect('back');
+    }
+
+    async destroy({request, response, session, params})
+    {
+        const user = await User.findOrFail(params.id);
+        await user.delete();
+        // Fash success message to session
+        session.flash({notification: 'User deleted!'});
+        return response.redirect('back');
     }
 }
 module.exports = UserController

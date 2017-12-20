@@ -3,7 +3,14 @@
 @section('content')
     <ul>
       @each(user in users)
-        <li>{{ user.username }}<a href="{{ route('user.show',{id:user._id}) }}">Show</a><a href="{{ route('user.edit',{id:user._id}) }}">Edit</a></li>
+        <li>{{ user.username }}
+            <a href="{{ route('user.show',{id:user._id}) }}">Show</a>
+            <a href="{{ route('user.edit',{id:user._id}) }}">Edit</a>
+            <form action="{{ route('user.destroy',{id:user._id}) }}?_method=DELETE" method="POST">
+                {{ csrfField() }}
+                <input type="submit" value="Delete">
+            </form>
+        </li>
       @endeach
     </ul>
 @endsection
